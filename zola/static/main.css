@@ -177,7 +177,7 @@ body:not(.dark) #sun {
 .site-section {
   padding: 0 14px;
   max-width: 768px;
-  margin: 40px auto 0 auto;
+  margin: 40px auto 60px auto;
 }
 
 .post-list-entry {
@@ -188,18 +188,6 @@ body:not(.dark) #sun {
   display: block;
   color: var(--secondary);
 }
-/*
-.post-list-entry {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.post-list-entry span {
-  flex-shrink: 0;
-  width: 140px;
-  color: var(--secondary);
-} */
 
 .post-header {
   margin-bottom: 30px;
@@ -207,6 +195,19 @@ body:not(.dark) #sun {
 
 .post-meta {
   color: var(--secondary);
+}
+
+.post-content p {
+  margin-bottom: 20px;
+}
+
+.post-content a {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+.post-content img {
+  margin: 20px 0;
 }
 
 code {
@@ -225,4 +226,16 @@ pre code {
   background: var(--hljs-bg) !important;
   overflow-x: auto;
   word-break: break-all;
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.site-footer a {
+  color: var(--primary);
+  text-decoration: underline;
 }
