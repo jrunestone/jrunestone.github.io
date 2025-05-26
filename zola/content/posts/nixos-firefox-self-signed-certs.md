@@ -51,7 +51,7 @@ First generate a certificate pair with `mkcert`.
 $ mkcert -pkcs12 -p12-file localhost.pfx localhost 127.0.0.1
 ```
 
-Put the files somewhere safe and then use the following environment variables (or in `appsettings.local.json`) to reference them in your project (the password is hard-coded by `mkcert`):
+Put the file somewhere safe and then use the following environment variables (or in `appsettings.local.json`) to reference them in your project (the password is hard-coded by `mkcert`):
 
 ```bash
 ASPNETCORE_Kestrel__Certificates__Default__Path="/path/to/localhost.pfx"
