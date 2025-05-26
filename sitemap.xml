@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://jrunestone.github.io/</loc>
+    </url>
+    <url>
+        <loc>https://jrunestone.github.io/how-my-nixos-config-works/</loc>
+        <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+        <loc>https://jrunestone.github.io/how-to-setup-nixos-dev-envs/</loc>
+        <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+        <loc>https://jrunestone.github.io/nixos-firefox-self-signed-certs/</loc>
+        <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+        <loc>https://jrunestone.github.io/nixos-traefik-reverse-proxy/</loc>
+        <lastmod>2025-05-25</lastmod>
+    </url>
+    <url>
+        <loc>https://jrunestone.github.io/posts/</loc>
+    </url>
+</urlset>

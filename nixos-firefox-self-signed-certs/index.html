@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Johan Runsten's blog</title>
+    <link href="/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <script src="/early.js"></script>
+    <header class="site-header">
+      <nav class="site-nav">
+        <a class="nav-logo" href="/">Johan Runsten's blog</a>
+        <ul>
+          <li>
+            <button id="theme-toggle">
+              <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <a href="https://github.com/jrunestone">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 16 16" width="20" aria-hidden="true" class="d-block"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.google.com/search?q=site:jrunestone.github.io">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
+                <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)">
+                  <path fill="currentColor" d="M 79.055 10.945 c -14.593 -14.593 -38.253 -14.593 -52.847 0 c -12.026 12.026 -14.132 30.206 -6.337 44.398 L 0.4 74.815 c -0.533 0.533 -0.533 1.398 0 1.931 L 13.253 89.6 c 0.533 0.533 1.398 0.533 1.931 0 l 19.472 -19.472 c 14.192 7.795 32.372 5.69 44.398 -6.337 C 93.648 49.198 93.648 25.538 79.055 10.945 z M 36.473 53.527 c -8.924 -8.924 -8.924 -23.393 0 -32.317 s 23.393 -8.924 32.317 0 s 8.924 23.393 0 32.317 S 45.397 62.451 36.473 53.527 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round"/>
+                </g>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="site-main">
+      <section class="site-section">
+        
+  <article class="post-article">
+    <header class="post-header">
+      <h1>How to use self-signed certificates for development environments in NixOS and Firefox</h1>
+      <p class="post-meta">2025-05-25</p>
+    </header>
+    <section class="post-content">
+      <p>Use a free self-signed SSL certificate to avoid getting warnings from the browser when using https on localhost.</p>
+<p>Also read <a href="https://jrunestone.github.io/nixos-traefik-reverse-proxy/">this post</a> to learn how to combine this with a reverse proxy to use custom domain names (without port numbers!) for your local development.</p>
+
+<h2>Table of contents</h2>
+<ol>
+	<li>
+		<a href="https://jrunestone.github.io/nixos-firefox-self-signed-certs/#generate-a-root-certificate-with-mkcert">Generate a root certificate with mkcert</a>
+		
+	</li>
+	<li>
+		<a href="https://jrunestone.github.io/nixos-firefox-self-signed-certs/#install-the-root-certificate-in-nixos">Install the root certificate in NixOS</a>
+		
+	</li>
+	<li>
+		<a href="https://jrunestone.github.io/nixos-firefox-self-signed-certs/#verify-the-root-cert-is-trusted-in-firefox">Verify the root cert is trusted in Firefox</a>
+		
+	</li>
+	<li>
+		<a href="https://jrunestone.github.io/nixos-firefox-self-signed-certs/#use-self-signed-certs-in-a-web-app-asp-net-core-application-example">Use self-signed certs in a web app (ASP.NET Core application example)</a>
+		
+	</li>
+</ol>
+<h2 id="generate-a-root-certificate-with-mkcert">Generate a root certificate with <code>mkcert</code></h2>
+<p>We'll be using <a href="https://github.com/FiloSottile/mkcert">mkcert</a> to generate our certificate.
+Open up a shell with <code>mkcert</code> and try to generate and install a root certificate automatically:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> nix-shell</span><span style="color:#bf616a;"> -p</span><span> mkcert
+</span><span style="color:#bf616a;">$</span><span> mkcert</span><span style="color:#bf616a;"> -install
+</span><span>
+</span><span style="color:#bf616a;">Created</span><span> a new local CA 💥
+</span><span style="color:#bf616a;">Installing</span><span> to the system store is not yet supported on this Linux 😣 but Firefox and/or Chrome/Chromium will still work.
+</span><span style="color:#bf616a;">You</span><span> can also manually install the root certificate at &quot;</span><span style="color:#a3be8c;">/home/jr/.local/share/mkcert/rootCA.pem</span><span>&quot;.
+</span><span style="color:#bf616a;">Note:</span><span> Firefox and/or Chrome/Chromium support is not available on your platform. ℹ️
+</span></code></pre>
+<h2 id="install-the-root-certificate-in-nixos">Install the root certificate in NixOS</h2>
+<p>The certificate was generated for us but we need to install it ourselves.</p>
+<p>Reference the path to the root certificate (you can run <code>mkcert -CAROOT</code> to see where it is) in your NixOS configuration (do NOT commit the certificate file to a git repository):</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
+</span><span>  </span><span style="color:#d08770;">security</span><span>.</span><span style="color:#d08770;">pki</span><span>.</span><span style="color:#d08770;">certificateFiles </span><span>= [</span><span style="color:#a3be8c;">/path/to/rootCA.pem</span><span>];
+</span><span>}
+</span></code></pre>
+<p>Rebuild your NixOS configuration.</p>
+<h2 id="verify-the-root-cert-is-trusted-in-firefox">Verify the root cert is trusted in Firefox</h2>
+<p>Open Firefox and open up settings and search for "certificates" hit "View certificates".
+Go to the "Authorities" tab and there you should see one ore more entries under "mkcert development CA":</p>
+<img src="/images/firefox-certs.png" alt="Firefox certificates view">
+<h2 id="use-self-signed-certs-in-a-web-app-asp-net-core-application-example">Use self-signed certs in a web app (ASP.NET Core application example)</h2>
+<p>First generate a certificate pair with <code>mkcert</code>.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> mkcert</span><span style="color:#bf616a;"> -pkcs12 -p12-file</span><span> localhost.pfx localhost 127.0.0.1
+</span></code></pre>
+<p>Put the files somewhere safe and then use the following environment variables (or in <code>appsettings.local.json</code>) to reference them in your project (the password is hard-coded by <code>mkcert</code>):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">ASPNETCORE_Kestrel__Certificates__Default__Path</span><span>=&quot;</span><span style="color:#a3be8c;">/path/to/localhost.pfx</span><span>&quot;
+</span><span style="color:#bf616a;">ASPNETCORE_Kestrel__Certificates__Default__Password</span><span>=&quot;</span><span style="color:#a3be8c;">changeit</span><span>&quot;
+</span></code></pre>
+<p>Visit your site - you should get no warnings from the browser:</p>
+<img src="/images/firefox-https.png" alt="Firefox secure connection">
+<p>Also read <a href="https://jrunestone.github.io/nixos-traefik-reverse-proxy/">this post</a> to learn how to combine this with a reverse proxy to use custom domain names (without port numbers!) for your local development.</p>
+
+    </section>
+  </article>
+
+      </section>
+    </main>
+    <script src="/late.js"></script>
+  </body>
+</html>
