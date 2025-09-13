@@ -1,8 +1,10 @@
 +++
 title = "How to install Incus on NixOS"
 template = "post.html"
-date = "2025-09-13"
+date = 2025-09-13
 path = "/how-to-install-incus-lxd-on-nixos"
+[taxonomies]
+tags = ["NixOS", "Incus", "Virtualization"]
 +++
 
 Set up Incus (LXD) container and VM manager on NixOS with a bridged network configuration as an alternative to Proxmox.

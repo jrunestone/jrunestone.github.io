@@ -1,8 +1,10 @@
 +++
 title = "How to install Home Assistant OS on an Incus VM"
 template = "post.html"
-date = "2025-09-14"
+date = 2025-09-14
 path = "/how-to-install-home-assistant-os-on-an-incus-vm"
+[taxonomies]
+tags = ["Home Assistant", "Incus", "Virtualization"]
 +++
 
 Install Home Assistant OS on an Incus VM via the image import command.

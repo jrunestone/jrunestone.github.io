@@ -1,8 +1,10 @@
 +++
 title = "How to use self-signed certificates for development environments in NixOS and Firefox"
 template = "post.html"
-date = "2025-05-25"
+date = 2025-05-25
 path = "/nixos-firefox-self-signed-certs"
+[taxonomies]
+tags = ["NixOS", "Certificates"]
 +++
 
 Use a free self-signed SSL certificate to avoid getting warnings from the browser when using https on localhost.
