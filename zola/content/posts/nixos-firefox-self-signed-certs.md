@@ -7,8 +7,6 @@ path = "/nixos-firefox-self-signed-certs"
 
 Use a free self-signed SSL certificate to avoid getting warnings from the browser when using https on localhost.
 
-<!--Also read [this post](@/posts/nixos-traefik-reverse-proxy.md) to learn how to combine this with a reverse proxy to use custom domain names (without port numbers!) for your local development.-->
-
 <!-- toc -->
 
 ## Generate a root certificate with `mkcert`
@@ -60,5 +58,3 @@ ASPNETCORE_Kestrel__Certificates__Default__Password="changeit"
 Visit your site - you should get no warnings from the browser:
 
 <img src="/images/firefox-https.png" alt="Firefox secure connection">
-
-<!--Also read [this post](@/posts/nixos-traefik-reverse-proxy.md) to learn how to combine this with a reverse proxy to use custom domain names (without port numbers!) for your local development.-->
