@@ -1,7 +1,7 @@
 +++
 title = "How to install Incus on NixOS"
 template = "post.html"
-date = 2025-09-13
+date = "2025-09-13"
 path = "/how-to-install-incus-lxd-on-nixos"
 +++
 
