@@ -168,7 +168,7 @@ incus launch images:debian/trixie test-container --profile bridged
 incus ls
 incus console --show-log test-container
 incus shell test-container
-incus rm test-container
+incus rm test-container -f
 ```
 
 You can log in to the web based UI by browsing to your Incus server's IP.
@@ -181,6 +181,5 @@ incus config set core.https_address :8443
 Then browse to `https://your-incus-server-ip:8443`.
 
 ## Links & references
-[Incus on NixOS Wiki](https://wiki.nixos.org/wiki/Incus)
-
+[Incus on NixOS Wiki](https://wiki.nixos.org/wiki/Incus)<br>
 [Install Incus and ZFS on NixOS](https://blog.hetherington.uk/2025/01/setting-up-incus-with-zfs-on-nixos/)
