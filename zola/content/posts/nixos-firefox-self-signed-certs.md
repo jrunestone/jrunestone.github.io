@@ -7,12 +7,12 @@ path = "/nixos-firefox-self-signed-certs"
 tags = ["NixOS", "Certificates"]
 +++
 
-Use a free self-signed SSL certificate to avoid getting warnings from the browser when using https on localhost.
+Use a free SSL certificate with a custom certificate authority (CA) to avoid getting warnings from the browser when using https on localhost.
 
 <!-- toc -->
 
 ## Generate a root certificate with `mkcert`
-We'll be using [mkcert](https://github.com/FiloSottile/mkcert) to generate our certificate.
+We'll be using [mkcert](https://github.com/FiloSottile/mkcert) to generate our certificates.
 Open up a shell with `mkcert` and try to generate and install a root certificate automatically:
 
 ```bash
@@ -44,8 +44,8 @@ Go to the "Authorities" tab and there you should see one ore more entries under 
 
 <img src="/images/firefox-certs.png" alt="Firefox certificates view">
 
-## Use self-signed certs in a web app (ASP.NET Core application example)
-First generate a certificate pair with `mkcert`.
+## Use custom certs in a web app (ASP.NET Core application example)
+First generate a certificate pair with `mkcert`. This certificate will be signed with your custom CA.
 
 ```bash
 $ mkcert -pkcs12 -p12-file localhost.pfx localhost 127.0.0.1
