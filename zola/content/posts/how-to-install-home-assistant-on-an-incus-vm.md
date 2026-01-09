@@ -37,7 +37,7 @@ properties:
 Now compress it.
 
 ```bash
-tar -xzfv metadata.yml
+tar -czf metadata.tar.gz metadata.yaml
 ```
 
 ## Import the image into Incus
