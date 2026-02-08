@@ -84,10 +84,6 @@ p {
   margin-bottom: 0;
 }
 
-ul {
-  padding: 0;
-}
-
 a {
   text-decoration: none;
 }
@@ -210,6 +206,18 @@ body:not(.dark) #sun {
   margin: 20px 0;
 }
 
+.post-footer {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.post-footer a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 code {
   margin: auto 4px;
   padding: 4px 6px;
@@ -226,16 +234,4 @@ pre code {
   background: var(--hljs-bg) !important;
   overflow-x: auto;
   word-break: break-all;
-}
-
-.site-footer {
-  text-align: center;
-  color: var(--secondary);
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.site-footer a {
-  color: var(--primary);
-  text-decoration: underline;
 }
