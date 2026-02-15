@@ -17,7 +17,7 @@ I'm only providing a quick overview of the system in this post. To see the full 
 ## Results
 The following code will produce a resource name like `ca-projectname-webapp-prod-swc` when publishing to Azure with environment name `Production`:
 
-```
+```csharp
 builder
     .WithAzureNamingConvention("projectname");
 
@@ -55,7 +55,7 @@ The core is the `InfrastructureResolver` class and how it's invoked for each res
 ## The InfrastructureResolver
 Here's the _gist_ of the custom infrastructure resolver:
 
-```
+```csharp
 public override void ResolveProperties(ProvisionableConstruct construct, ProvisioningBuildOptions options)
 {
     // ...
@@ -87,7 +87,7 @@ public override void ResolveProperties(ProvisionableConstruct construct, Provisi
 A name resolver is a generic implementation, the type argument being the type of a specific provisionable Azure resource.
 The default resolver looks like this:
 
-```
+```csharp
 public virtual string ResolveName(T resource, NameResolutionContext context)
 {
     var parts = new List<string?> {
@@ -107,7 +107,7 @@ public virtual string ResolveName(T resource, NameResolutionContext context)
 ## Resource-specific name resolvers (overrides)
 Certain resources have certain requirements. Here's the name resolver of an Azure SQL database resource that isn't bound to a region and therefore shouldn't include the region name in the resource name:
 
-```
+```csharp
 public class SqlDatabaseNameResolver : DefaultResourceNameResolver<SqlDatabase>
 {
     public SqlDatabaseNameResolver(IEnvironmentNameResolver environmentNameResolver)
@@ -131,7 +131,7 @@ To include (or override) a custom resource name resolver simply register it with
 ## Putting it all together
 Here's the code for the `WithAzureNamingConvention` extension that wires everything up:
 
-```
+```csharp
 public IDistributedApplicationBuilder WithAzureNamingConvention(string projectName)
 {
     // environment name resolver
