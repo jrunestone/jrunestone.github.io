@@ -44,7 +44,7 @@ builder
 If the `WithAzureWorkloadName` is omitted, the resource name would be `ca-projectname-prod-swc` (without a specific workload name, useful for shared resources that only has 1 instance such as a key vault).
 
 ## Overview
-The core is the `InfrastructureResolver` class and how it's invoked for each resource being provisioned. By registering our own implementation we can set the name of the resource.
+The key is the `InfrastructureResolver` class and how it's invoked for each resource being provisioned. By registering our own implementation we can set the name of the resource.
 
 1. Register a custom `InfrastructureResolver`.
 2. The `ResolveProperties` method is called for each resource being provisioned.
