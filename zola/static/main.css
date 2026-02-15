@@ -218,20 +218,35 @@ body:not(.dark) #sun {
   text-decoration: underline;
 }
 
+.giallo-l {
+    display: inline-block;
+    min-height: 1lh;
+    width: 100%;
+}
+.giallo-ln {
+    display: inline-block;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0.4em;
+    min-width: 3ch;
+    text-align: right;
+    opacity: 0.8;
+}
+
 code {
   margin: auto 4px;
   padding: 4px 6px;
   font-size: 0.78em;
   line-height: 1.5;
-  background: var(--code-bg);
+  #background: var(--code-bg);
 }
 
 pre code {
   display: block;
   margin: auto 0;
   padding: 10px;
-  color: #d5d5d6;
-  background: var(--hljs-bg) !important;
+  #color: #d5d5d6;
+  #background: var(--hljs-bg) !important;
   overflow-x: auto;
   word-break: break-all;
 }
