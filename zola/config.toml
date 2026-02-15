@@ -13,7 +13,8 @@ taxonomies = [
 
 [markdown.highlighting]
 style = "inline"
-theme = "slack-dark"
+light_theme = "material-theme"
+dark_theme = "slack-dark"
 
 [extra]
 # Put all your custom variables here
