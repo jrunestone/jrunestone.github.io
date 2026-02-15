@@ -12,7 +12,7 @@ Give your resources predictable and standardized names based on the resource typ
 <!-- toc -->
 
 ## Link to the code
-I'm only providing a quick overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/toxic-aspire/tree/main/src/Toxic.Aspire/NamingConventions). It's part of a general nuget with some other utilities but the naming convention system is completely standalone and can be extracted from there.
+I'm only providing a quick overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a general nuget with some other utilities but the naming convention system is completely standalone and can be extracted from there.
 
 ## Results
 The following code will produce a resource name like `ca-projectname-webapp-prod-swc` when publishing to Azure with environment name `Production`:
