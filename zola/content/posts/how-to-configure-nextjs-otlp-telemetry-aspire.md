@@ -3,6 +3,8 @@ title = "How to configure NextJS Open Telemetry (OTLP) instrumentation in Aspire
 template = "post.html"
 date = 2026-02-08
 path = "/how-to-configure-nextjs-otlp-telemetry-aspire"
+[taxonomies]
+tags = ["Aspire", "NextJs", "Open Telemetry"]
 +++
 
 Get all the Open Telemetry traces and logs from your NextJS application with `pino` and `next-logger`. Works great with [Aspire's GRPC OTLP endpoints](https://aspire.dev/fundamentals/telemetry/) when the included default NextJS setup just doesn't work.
