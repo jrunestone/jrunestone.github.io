@@ -12,7 +12,32 @@ Give your resources predictable and standardized names based on the resource typ
 <!-- toc -->
 
 ## Link to the code
-I'm only providing a quick overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a general nuget with some other utilities but the naming convention system is completely standalone and can be extracted from there.
+I'm only providing an overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a general nuget with some other utilities but the naming convention system is completely standalone and can be extracted from there.
+
+## The problem
+When you define a resource in your Aspire app host you give it a name. This name will show up in the Aspire dashboard for that resource and it will also be the basis for its counterpart in Azure when deploying your code to the cloud. But Aspire doesn't give your cloud resource exactly the same name, it will often add a random identifier to it. 
+
+Given this name for a container environment resource:
+```csharp
+builder.AddAzureContainerAppEnvironment("container-env");
+```
+
+After running `aspire publish` the bicep deployment file for this resoure contains the following which equates to something like `containerenvacrwup6kt2dn76fa`:
+```bicep
+resource container_env 'Microsoft.App/managedEnvironments@2025-01-01' = {
+  name: take('containerenv${uniqueString(resourceGroup().id)}', 24)
+```
+
+This might be okay for smaller projects or hobby setups but this becomes very cumbersome and unpredictable when say hosting a larger project with a lot of resources for a client that also probably entails several automation tasks and references to resource names. In these cases it's most likely your company has a naming policy or convention that the project and its resources must adhere to.
+
+[Azure also has documentation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) recommending a standardized naming convention along it's Cloud Adoption Framework guidelines.
+
+## What this code does
+While there are ways of customizing your cloud resource names they either have to be done for each resource manually in the app host (via `ConfigureInfrastructure` callbacks) or centrally with a big switch clause on resource type often being the recommended solution.
+
+But we can automatically generate a predictable cloud resource name for the resources defined in the app host. The default naming scheme looks like this: `{resource prefix}-{project/client name}-{optional workload name}-{environment name}`. The scheme is based on the above linked Azure documentation and also [these resource abbreviations](https://www.azureperiodictable.com/) made for Azure specifically.
+
+An example of this would be for a container app called "webapp": `ca-projectname-webapp-prod-swc`. The naming scheme is completely customizable for each individual type of resource.
 
 ## Results
 The following code will produce a resource name like `ca-projectname-webapp-prod-swc` when publishing to Azure with environment name `Production`:
