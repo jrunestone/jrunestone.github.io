@@ -41,7 +41,7 @@ But we can automatically generate a predictable cloud resource name for the reso
 
 An example of this would be for a container app called "webapp": `ca-projectname-webapp-prod-swc`. The naming scheme is completely customizable for each individual type of resource.
 
-Scroll down to the end to see the resources in the Azure portal with this naming scheme applied.
+[Scroll down to the end](#final-result) to see the resources in the Azure portal with this naming scheme applied.
 
 ## How to use it
 The following code will produce a resource name like `ca-projectname-webapp-prod-swc` when publishing to Azure with environment name `Production`:
