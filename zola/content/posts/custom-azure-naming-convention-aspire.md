@@ -28,6 +28,8 @@ resource container_env 'Microsoft.App/managedEnvironments@2025-01-01' = {
   name: take('containerenv${uniqueString(resourceGroup().id)}', 24)
 ```
 
+<img src="/images/aspire-naming-before.png" alt="Aspire's default naming convention">
+
 This might be okay for smaller projects or hobby setups but this becomes very cumbersome and unpredictable when say hosting a larger project with a lot of resources for a client that also probably entails several automation tasks and references to resource names. In these cases it's most likely your company has a naming policy or convention that the project and its resources must adhere to.
 
 [Azure also has documentation](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming) recommending a standardized naming convention along it's Cloud Adoption Framework guidelines.
@@ -39,7 +41,9 @@ But we can automatically generate a predictable cloud resource name for the reso
 
 An example of this would be for a container app called "webapp": `ca-projectname-webapp-prod-swc`. The naming scheme is completely customizable for each individual type of resource.
 
-## Results
+Scroll down to the end to see the resources in the Azure portal with this naming scheme applied.
+
+## How to use it
 The following code will produce a resource name like `ca-projectname-webapp-prod-swc` when publishing to Azure with environment name `Production`:
 
 ```csharp
@@ -68,7 +72,7 @@ builder
 
 If the `WithAzureWorkloadName` is omitted, the resource name would be `ca-projectname-prod-swc` (without a specific workload name, useful for shared resources that only has 1 instance such as a key vault).
 
-## Overview
+## System overview
 The key is the `InfrastructureResolver` class and how it's invoked for each resource being provisioned. By registering our own implementation we can set the name of the resource.
 
 1. Register a custom `InfrastructureResolver`.
@@ -191,3 +195,7 @@ public IDistributedApplicationBuilder WithAzureNamingConvention(string projectNa
 }
 ```
 
+## Final result
+And here's how our resources in Azure look now. Note the managed identity resource that was automatically created but that doesn't have a custom naming resolver registered to its resource type.
+
+<img src="/images/aspire-naming-after.png" alt="Custom Aspire naming convention">
