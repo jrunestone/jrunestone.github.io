@@ -37,7 +37,7 @@ This might be okay for smaller projects or hobby setups but this becomes very cu
 ## What this code does
 While there are ways of customizing your cloud resource names they either have to be done for each resource manually in the app host (via `ConfigureInfrastructure` callbacks) or centrally with a big switch clause on resource type often being the recommended solution.
 
-But we can automatically generate a predictable cloud resource name for the resources defined in the app host. The default naming scheme looks like this: `{resource prefix}-{project/client name}-{optional workload name}-{environment name}`. The scheme is based on the above linked Azure documentation and also [these resource abbreviations](https://www.azureperiodictable.com/) made for Azure specifically.
+But we can automatically generate a predictable cloud resource name for the resources defined in the app host. The default naming scheme looks like this: `{resource prefix}-{project/client name}-{optional workload name}-{environment name}-{region}`. The scheme is based on the above linked Azure documentation and also [these resource abbreviations](https://www.azureperiodictable.com/) made for Azure specifically.
 
 An example of this would be for a container app called "webapp": `ca-projectname-webapp-prod-swc`. The naming scheme is completely customizable for each individual type of resource.
 
