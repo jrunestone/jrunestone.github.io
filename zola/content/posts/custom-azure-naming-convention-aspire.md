@@ -12,7 +12,7 @@ Give your resources predictable and standardized names based on the resource typ
 <!-- toc -->
 
 ## Link to the code
-I'm only providing an overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a general nuget with some other utilities but the naming convention system is completely standalone and can be extracted from there.
+I'm only providing an overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a [general nuget](https://www.nuget.org/packages/AspireTools) with some other Aspire related utilities but the naming convention system is completely standalone and can be extracted from there.
 
 ## The problem
 When you define a resource in your Aspire app host you give it a name. This name will show up in the Aspire dashboard for that resource and it will also be the basis for its counterpart in Azure when deploying your code to the cloud. But Aspire doesn't give your cloud resource exactly the same name, it will often add a random identifier to it. 
