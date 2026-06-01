@@ -75,7 +75,7 @@ However the ConBee II requires us to forward the entire USB controller that it's
 
 ```bash
 # pci device address can be read with lspci (pciutils on NixOS)
-incus config device homeassistant conbee pci address=xx:yy.z
+incus config device homeassistant add conbee pci address=xx:yy.z
 ```
 
 You need to stop and start the instance to passthrough a PCI device.
