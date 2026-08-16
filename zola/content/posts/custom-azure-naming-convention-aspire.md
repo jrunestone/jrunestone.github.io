@@ -7,12 +7,14 @@ path = "/custom-azure-naming-convention-aspire"
 tags = ["Aspire", "Azure"]
 +++
 
+**_Updated 2026-08-16_**
+
 Give your resources predictable and standardized names based on the resource type, environment and region when deploying them to Azure instead of the default random names.
 
 <!-- toc -->
 
 ## Link to the code
-I'm only providing an overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/aspire-tools/tree/main/src/AspireTools/NamingConventions). It's part of a [utility nuget](https://www.nuget.org/packages/AspireTools) with some other Aspire related utilities but the naming convention system is completely standalone and can be extracted from there.
+I'm only providing an overview of the system in this post. To see the full code and a sample app check out [this repo on GitHub](https://github.com/toxicinteractive/toxic-aspire-namingconventions-azure). It's also published as a [nuget](https://www.nuget.org/packages/Toxic.Aspire.NamingConventions.Azure/).
 
 ## The problem
 When you define a resource in your Aspire app host you give it a name. This name will show up in the Aspire dashboard for that resource and it will also be the basis for its counterpart in Azure when deploying your code to the cloud. But Aspire doesn't give your cloud resource exactly the same name, it will often add a random identifier to it. 
@@ -49,6 +51,8 @@ The following code will produce a resource name like `ca-projectname-webapp-prod
 ```csharp
 builder
     .WithAzureNamingConvention("projectname");
+    // you can also customize the pattern:
+    //.WithAzureNamingConvention("projectname", "{Prefix}{Workload}{Env})";
 
 builder
     .WithProject<MyProject>("aspire-name")
@@ -117,20 +121,30 @@ A name resolver is a generic implementation, the type argument being the type of
 The default resolver looks like this:
 
 ```csharp
-public virtual string ResolveName(T resource, NameResolutionContext context)
-{
-    var parts = new List<string?> {
-        ResourcePrefixes.GetResourcePrefix(resource),
-        context.ProjectName,
-        context.AzureWorkloadName,
-        _environmentNameResolver.ResolveEnvironmentName(context.EnvironmentName),
-        context.SupportsRegion ?
-            RegionNames.GetRegionName(context.ResourceRegion ?? context.DefaultRegion) :
-            null
-    };
+public virtual string? ResolveName(T resource, NameResolutionContext context)
+    {
+        var prefix = _resourcePrefixResolver.ResolveResourcePrefix(resource);
+        var envName = _environmentNameResolver.ResolveEnvironmentName(context.EnvironmentName);
+        var regionName = context.SupportsRegion ?
+            _regionNameResolver.ResolveRegionName(context.ResourceRegion ?? context.DefaultRegion) :
+            null;
 
-    return string.Join(context.Separator, parts.Where(x => !string.IsNullOrWhiteSpace(x)));
-}
+        if (string.IsNullOrWhiteSpace(prefix))
+        {
+            return null;
+        }
+
+        var pattern = context.Pattern ?? "{Prefix}{Project}{Workload}{Env}{Region}";
+
+        pattern = ReplaceSegment(pattern, "{Prefix}", prefix, context.Separator);
+        pattern = ReplaceSegment(pattern, "{Project}", context.ProjectName, context.Separator);
+        pattern = ReplaceSegment(pattern, "{Workload}", context.AzureWorkloadName, context.Separator);
+        pattern = ReplaceSegment(pattern, "{Env}", envName, context.Separator);
+        pattern = ReplaceSegment(pattern, "{Region}", regionName, context.Separator);
+        pattern = pattern.TrimEnd(context.Separator).ToString();
+
+        return pattern;
+    }
 ```
 
 ## Resource-specific name resolvers (overrides)
@@ -139,11 +153,7 @@ Certain resources have certain requirements. Here's the name resolver of an Azur
 ```csharp
 public class SqlDatabaseNameResolver : DefaultResourceNameResolver<SqlDatabase>
 {
-    public SqlDatabaseNameResolver(IEnvironmentNameResolver environmentNameResolver)
-        : base(environmentNameResolver)
-    {
-
-    }
+    // ...
 
     public override string ResolveName(SqlDatabase resource, NameResolutionContext context)
     {
@@ -161,12 +171,14 @@ To include (or override) a custom resource name resolver simply register it with
 Here's the code for the `WithAzureNamingConvention` extension that wires everything up:
 
 ```csharp
-public IDistributedApplicationBuilder WithAzureNamingConvention(string projectName)
+public IDistributedApplicationBuilder WithAzureNamingConvention(string projectName, string? pattern = null)
 {
-    // environment name resolver
+    // default helper resolvers
+    builder.Services.AddSingleton<IRegionNameResolver, DefaultRegionNameResolver>();
+    builder.Services.AddSingleton<IResourcePrefixResolver, DefaultResourcePrefixResolver>();
     builder.Services.AddSingleton<IEnvironmentNameResolver, DefaultEnvironmentNameResolver>();
 
-    // register our default resource name resolvers for some resources
+    // default resource resolvers
     builder.Services.AddSingleton<IResourceNameResolver<ContainerApp>, DefaultResourceNameResolver<ContainerApp>>();
     builder.Services.AddSingleton<IResourceNameResolver<KeyVaultService>, DefaultResourceNameResolver<KeyVaultService>>();
     builder.Services.AddSingleton<IResourceNameResolver<ContainerRegistryService>, DefaultResourceNameResolver<ContainerRegistryService>>();
@@ -174,11 +186,10 @@ public IDistributedApplicationBuilder WithAzureNamingConvention(string projectNa
     builder.Services.AddSingleton<IResourceNameResolver<SqlServer>, DefaultResourceNameResolver<SqlServer>>();
     builder.Services.AddSingleton<IResourceNameResolver<StorageAccount>, DefaultResourceNameResolver<StorageAccount>>();
 
-    // specific resource name resolver overrides
+    // specific resource resolver overrides
     builder.Services.AddSingleton<IResourceNameResolver<ContainerAppManagedEnvironment>, ContainerAppManagedEnvironmentNameResolver>();
     builder.Services.AddSingleton<IResourceNameResolver<SqlDatabase>, SqlDatabaseNameResolver>();
 
-    // register our custom InfrastructureResolver
     builder.Services.Configure<AzureProvisioningOptions>(options =>
     {
         options
@@ -187,6 +198,7 @@ public IDistributedApplicationBuilder WithAzureNamingConvention(string projectNa
             .Insert(0, new NamingInfrastructureResolver(
                 projectName,
                 builder.Environment.EnvironmentName,
+                pattern,
                 GetDefaultLocationFromConfig(builder),
                 builder.Services));
     });
